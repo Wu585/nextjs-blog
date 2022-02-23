@@ -1,8 +1,9 @@
 import Head from 'next/head';
 import React from 'react';
 import 'styles/global.scss'
+import type { AppProps /*, AppContext */ } from 'next/app'
 
-export default function App({Component,pageProps}) {
+export default function App({Component,pageProps}:AppProps) {
   return <div className={"frank"}>
     <Head>
       <title>
