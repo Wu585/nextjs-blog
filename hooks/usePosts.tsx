@@ -4,7 +4,9 @@ import axios from 'axios';
 export type Post = {
   id: string,
   title: string,
-  date: string
+  date: string,
+  content: string,
+  htmlContent: string
 }
 
 export const usePosts = () => {

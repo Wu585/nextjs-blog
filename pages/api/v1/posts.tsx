@@ -10,3 +10,4 @@ const Posts = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 export default Posts;
+
