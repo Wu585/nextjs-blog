@@ -3,6 +3,7 @@ import {Post, usePosts} from '../../hooks/usePosts';
 import React from 'react';
 import getPosts from '../../lib/posts';
 import posts from '../../lib/posts';
+import Link from 'next/link';
 
 // 客户端渲染
 /*const PostsIndex: NextPage = () => {
@@ -28,7 +29,9 @@ const PostsIndex: NextPage<Props> = (props) => {
     <div>
       <h1>文章列表</h1>
       {posts.map(p => <div key={p.id}>
-        {p.id}
+        <Link href={`/posts/${p.id}`}>
+          <a>{p.id}</a>
+        </Link>
       </div>)}
     </div>
   );
