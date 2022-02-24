@@ -74,7 +74,7 @@ var CreatePost1645629562009 = /*#__PURE__*/function () {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return queryRunner.dropTable('posts');
+                return queryRunner.query('TRUNCATE TABLE posts');
 
               case 2:
                 return _context2.abrupt("return", _context2.sent);

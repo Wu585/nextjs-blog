@@ -23,7 +23,7 @@ export class CreatePost1645629562009 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     // 降级数据库
-    return await queryRunner.dropTable('posts');
+    return await queryRunner.query('TRUNCATE TABLE posts');
   }
 
 }
