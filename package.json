@@ -6,8 +6,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "migration:run": "typeorm migration:run",
-    "migration:revert": "typeorm migration:revert",
+    "m:run": "typeorm migration:run",
+    "m:create": "typeorm migration:create",
+    "m:revert": "typeorm migration:revert",
     "entity:create": "typeorm entity:create"
   },
   "dependencies": {
