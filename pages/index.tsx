@@ -1,9 +1,8 @@
-import Link from 'next/link';
 import React from 'react';
-import Image from 'next/image';
-import png from 'assets/images/img.png';
 import {UAParser} from 'ua-parser-js';
 import {GetServerSideProps, NextPage} from 'next';
+import {getConnection} from 'typeorm';
+import {getDatabaseConnection} from '../lib/getDatabaseConnection';
 
 type Props = {
   browser: {
@@ -19,7 +18,7 @@ const Index: NextPage<Props> = (props) => {
   const {browser} = props
   return (
     <div>
-      <h1>你的浏览器是:{browser.browser.name}</h1>
+      <h1>你的浏览器是1211:{browser.browser.name}</h1>
     </div>
   );
 };
@@ -27,6 +26,8 @@ const Index: NextPage<Props> = (props) => {
 export default Index;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const connect = await getDatabaseConnection();
+  console.log('connect');
   const ua = context.req.headers['user-agent'];
   const result = new UAParser(ua).getResult();
   return {
