@@ -1,24 +1,18 @@
 import React from 'react';
 import {UAParser} from 'ua-parser-js';
 import {GetServerSideProps, NextPage} from 'next';
-import {getConnection} from 'typeorm';
 import {getDatabaseConnection} from '../lib/getDatabaseConnection';
+import {Post} from '../src/entity/Post';
 
 type Props = {
-  browser: {
-    browser:{
-      name:string,
-      version:string,
-      major:string
-    }
-  }
+  posts: Post[]
 }
 
 const Index: NextPage<Props> = (props) => {
-  const {browser} = props
+  const {posts} = props;
   return (
     <div>
-      <h1>你的浏览器是1211:{browser.browser.name}</h1>
+      {posts.map(post => <div>{post.title}</div>)}
     </div>
   );
 };
@@ -27,12 +21,10 @@ export default Index;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const connect = await getDatabaseConnection();
-  console.log('connect');
-  const ua = context.req.headers['user-agent'];
-  const result = new UAParser(ua).getResult();
+  const posts = await connect.manager.find(Post);
   return {
     props: {
-      browser: JSON.parse(JSON.stringify(result))
+      posts: JSON.parse(JSON.stringify(posts))
     }
   };
 };
