@@ -15,19 +15,11 @@ const create = async () => {
 
 const promise = (async function () {
   const manager = getConnectionManager();
-  const hasDefaultConnection = manager.has('default');
-  if (!hasDefaultConnection) {
-    console.log('创建connection');
-    return create();
-  } else {
-    console.log('复用connection');
-    const current = manager.get('default');
-    if (current.isConnected) {
-      return current;
-    } else {
-      return create();
-    }
+  const current = manager.has('default') && manager.get('default');
+  if (current && current.isConnected) {
+    await current.close();
   }
+  return create();
 })();
 
 export const getDatabaseConnection = async () => {
