@@ -6,12 +6,10 @@ const Signup: NextPage = () => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
-    password_confirmation: '',
   });
   const [errors, setErrors] = useState({
     username: [],
     password: [],
-    password_confirmation: []
   });
   const onSubmit = useCallback((e) => {
     e.preventDefault();
@@ -19,6 +17,7 @@ const Signup: NextPage = () => {
       .then(() => {
         window.alert('登录成功')
       }, (error) => {
+        console.log('error.response');
         console.log(error.response);
         if (error.response) {
           const response: AxiosResponse = error.response;
