@@ -379,6 +379,11 @@
   dependencies:
     axios "*"
 
+"@types/lodash@^4.14.179":
+  version "4.14.179"
+  resolved "https://registry.npmmirror.com/@types/lodash/-/lodash-4.14.179.tgz#490ec3288088c91295780237d2497a3aa9dfb5c5"
+  integrity sha512-uwc1x90yCKqGcIOAT6DwOSuxnrAbpkdPsUOZtwrXb4D/6wZs+6qG7QnIawDuZWg0sWpxl+ltIKCaLoMlna678w==
+
 "@types/marked@^4.0.2":
   version "4.0.2"
   resolved "https://registry.npmmirror.com/@types/marked/-/marked-4.0.2.tgz#cb2dbf10da2f41cf20bd91fb5f89b67540c282f7"
