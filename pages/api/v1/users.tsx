@@ -1,7 +1,6 @@
 import {NextApiRequest, NextApiResponse} from 'next';
 import {getDatabaseConnection} from '../../../lib/getDatabaseConnection';
 import {User} from '../../../src/entity/User';
-import md5 from 'md5';
 
 const Users = async (req: NextApiRequest, res: NextApiResponse) => {
   const {username, password, password_confirmation} = req.body;

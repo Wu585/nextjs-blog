@@ -1,6 +1,9 @@
-import {NextPage} from 'next';
+import {GetServerSideProps, NextPage} from 'next';
 import {useCallback, useState} from 'react';
 import axios, {AxiosError, AxiosResponse} from 'axios';
+import {getDatabaseConnection} from '../lib/getDatabaseConnection';
+import {Post} from '../src/entity/Post';
+import {withSession} from '../lib/withSession';
 
 const Signup: NextPage = () => {
   const [formData, setFormData] = useState({
@@ -76,3 +79,5 @@ const Signup: NextPage = () => {
 };
 
 export default Signup;
+
+

@@ -1,8 +1,10 @@
-import {NextPage} from 'next';
+import {GetServerSideProps, NextPage} from 'next';
 import {useCallback, useState} from 'react';
-import axios, {AxiosError, AxiosResponse} from 'axios';
+import axios, {AxiosResponse} from 'axios';
+import {withSession} from '../lib/withSession';
+import {User} from '../src/entity/User';
 
-const Signup: NextPage = () => {
+const Signup: NextPage<{ user: User }> = (props) => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -15,15 +17,11 @@ const Signup: NextPage = () => {
     e.preventDefault();
     axios.post('/api/v1/sessions', formData)
       .then(() => {
-        window.alert('登录成功')
+        window.alert('登录成功');
       }, (error) => {
-        console.log('error.response');
-        console.log(error.response);
         if (error.response) {
           const response: AxiosResponse = error.response;
           if (response.status === 422) {
-            console.log('response.data');
-            console.log(response.data);
             setErrors(response.data);
           }
         }
@@ -31,6 +29,9 @@ const Signup: NextPage = () => {
   }, [formData]);
   return (
     <div>
+      {props.user &&
+      <div>当前登录用户为 {props.user.username}</div>
+      }
       <h1>登录</h1>
       <form onSubmit={onSubmit}>
         <div>
@@ -64,3 +65,14 @@ const Signup: NextPage = () => {
 };
 
 export default Signup;
+
+// @ts-ignore
+export const getServerSideProps: GetServerSideProps = withSession(async (context) => {
+  // @ts-ignore
+  const user = context.req.session.get('currentUser');
+  return {
+    props: {
+      user: user ? user : null
+    }
+  };
+});
