@@ -9,7 +9,12 @@ const Posts = withSession(async (req: NextApiRequest, res: NextApiResponse) => {
     const post = new Post();
     post.title = title;
     post.content = content;
-    post.author = req.session.get('currentUser');
+    const user = req.session.get('currentUser');
+    if (!user) {
+      res.status(401).json({message: 'Unauthorized'});
+      return;
+    }
+    post.author = user;
     const connection = await getDatabaseConnection();
     await connection.manager.save(post);
     res.json(post);

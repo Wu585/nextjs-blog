@@ -4,6 +4,7 @@ import axios, {AxiosResponse} from 'axios';
 import {withSession} from '../lib/withSession';
 import {User} from '../src/entity/User';
 import Form from '../components/Form';
+import qs from 'qs';
 
 const Signup: NextPage<{ user: User }> = (props) => {
   const [formData, setFormData] = useState({
@@ -19,6 +20,8 @@ const Signup: NextPage<{ user: User }> = (props) => {
     axios.post('/api/v1/sessions', formData)
       .then(() => {
         window.alert('登录成功');
+        const query = qs.parse(window.location.search.split('?')[1]);
+        query.return_to && (window.location.href = query.return_to?.toString());
       }, (error) => {
         if (error.response) {
           const response: AxiosResponse = error.response;
