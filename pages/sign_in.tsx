@@ -1,9 +1,6 @@
-import {GetServerSideProps, NextPage} from 'next';
+import {NextPage} from 'next';
 import {useCallback, useState} from 'react';
-import axios, {AxiosError, AxiosResponse} from 'axios';
-import {getDatabaseConnection} from '../lib/getDatabaseConnection';
-import {Post} from '../src/entity/Post';
-import {withSession} from '../lib/withSession';
+import axios, {AxiosResponse} from 'axios';
 import Form from '../components/Form';
 
 const Signup: NextPage = () => {

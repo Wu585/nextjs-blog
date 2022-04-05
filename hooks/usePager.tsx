@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import qs from 'qs';
 import _ from 'lodash';
 
 type Options = {

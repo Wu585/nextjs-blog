@@ -4,7 +4,7 @@ import axios, {AxiosResponse} from 'axios';
 import {withSession} from '../lib/withSession';
 import {User} from '../src/entity/User';
 import Form from '../components/Form';
-import qs from 'qs';
+import qs from 'querystring';
 
 const Signup: NextPage<{ user: User }> = (props) => {
   const [formData, setFormData] = useState({
