@@ -21,12 +21,9 @@ const Signup: NextPage = () => {
         window.alert('注册成功');
         window.location.href = '/sign_up';
       }, (error) => {
-        console.log(error.response);
         if (error.response) {
           const response: AxiosResponse = error.response;
           if (response.status === 422) {
-            console.log('response.data');
-            console.log(response.data);
             setErrors(response.data);
           }
         }

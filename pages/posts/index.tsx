@@ -3,7 +3,7 @@ import {GetServerSideProps, NextPage} from 'next';
 import {getDatabaseConnection} from 'lib/getDatabaseConnection';
 import {Post} from 'src/entity/Post';
 import Link from 'next/link';
-import qs from 'querystring';
+import qs from 'qs';
 import usePager from '../../hooks/usePager';
 
 type Props = {

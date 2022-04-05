@@ -11,20 +11,17 @@ createConnection().then(async connection => {
   u1.username = 'frank';
   u1.passwordDigest = 'xxx';
   await manager.save(u1);
-  console.log(u1.id);
   // 创建 Post
   const p1 = new Post();
   p1.title = 'Post 1';
   p1.content = '我的第一篇博客';
   p1.author = u1;
   await manager.save(p1);
-  console.log(p1.id);
   // 创建 Comment
   const c1 = new Comment();
   c1.user = u1;
   c1.post = p1;
   c1.content = 'Good Blog';
   await manager.save(c1);
-  console.log(c1.id);
   await connection.close();
 }).catch(error => console.log(error));

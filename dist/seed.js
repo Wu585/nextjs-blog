@@ -32,31 +32,28 @@ var _Comment = require("./entity/Comment");
             return manager.save(u1);
 
           case 6:
-            console.log(u1.id); // 创建 Post
-
+            // 创建 Post
             p1 = new _Post.Post();
             p1.title = 'Post 1';
             p1.content = '我的第一篇博客';
             p1.author = u1;
-            _context.next = 13;
+            _context.next = 12;
             return manager.save(p1);
 
-          case 13:
-            console.log(p1.id); // 创建 Comment
-
+          case 12:
+            // 创建 Comment
             c1 = new _Comment.Comment();
             c1.user = u1;
             c1.post = p1;
             c1.content = 'Good Blog';
-            _context.next = 20;
+            _context.next = 18;
             return manager.save(c1);
 
-          case 20:
-            console.log(c1.id);
-            _context.next = 23;
+          case 18:
+            _context.next = 20;
             return connection.close();
 
-          case 23:
+          case 20:
           case "end":
             return _context.stop();
         }

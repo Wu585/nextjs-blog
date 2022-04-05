@@ -28,8 +28,8 @@ const usePager = (options: Options) => {
         <a>上一页</a>
       </Link>
       }
-      {pageNumbers.map(n => n === -1 ? <span key={n}>...</span> :
-        <Link key={n} href={urlMaker(n)}><a>{n}</a></Link>)}
+      {pageNumbers.map(n => n === -1 ? <span>...</span> :
+        <Link href={urlMaker(n)}><a>{n}</a></Link>)}
       {totalPages > page &&
       <Link href={urlMaker(page + 1)}>
         <a>下一页</a>

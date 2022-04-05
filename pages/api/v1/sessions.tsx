@@ -4,7 +4,6 @@ import {withSession} from '../../../lib/withSession';
 
 const Sessions = async (req: NextApiRequest, res: NextApiResponse) => {
   const {username, password} = req.body;
-  console.log(req.session);
   res.setHeader('Content-Type', 'application/json;charset=utf-8');
   const signIn = new SignIn();
   signIn.username = username;
