@@ -45,10 +45,10 @@ export const getDatabaseConnection = async () => {
 
 const options = {
   ...config,
-  host: process.env.NODE_ENV === 'production' ? 'localhost' : config.host,
-  database: process.env.NODE_ENV === 'production' ? 'blog_production' : 'blog_development',
+  host: process.env.NODE_ENV === 'production' ? config.host : config.host,
+  database: process.env.NODE_ENV === 'production' ? 'blog_development' : 'blog_development',
   entities: [Post, User, Comment]
-}
+};
 
 function entitiesChanged(prevEntities: any[], newEntities: any[]): boolean {
   if (prevEntities.length !== newEntities.length) return true;
@@ -74,21 +74,19 @@ async function updateConnectionEntities(connection: Connection, entities: any[])
   }
 }
 
-export async function getDatabaseConnection(){
+export async function getDatabaseConnection() {
   const connectionManager = getConnectionManager();
 
   if (connectionManager.has('default')) {
     const connection = connectionManager.get('default');
-
-    if (process.env.NODE_ENV !== 'production') {
-      await updateConnectionEntities(connection, options.entities);
-    }
+    // 此处不分开发环境与生产环境了，原因尚未知
+    await updateConnectionEntities(connection, options.entities);
 
     return connection;
   }
 
   // @ts-ignore
-  return await connectionManager.create({ ...options }).connect();
+  return await connectionManager.create({...options}).connect();
 }
 
 /*
