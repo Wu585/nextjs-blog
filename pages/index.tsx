@@ -7,7 +7,7 @@ const Home: NextPage = () => {
   return (
     <>
       <div className="cover">
-        <Image src={logo}/>
+        <Image src={logo} width={120} height={120}/>
         <h1>精致的个人博客系统</h1>
         <p>
           <Link href="/posts">

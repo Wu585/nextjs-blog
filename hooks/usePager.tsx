@@ -19,9 +19,10 @@ const usePager = (options: Options) => {
     numbers.push(i);
   }
   numbers.push(totalPages);
-  const pageNumbers = _.uniq(numbers).sort().filter(n => n > 0 && n <= totalPages).reduce((result, n) => n - (result[result.length - 1] || 0) === 1
-    ? result.concat(n) : result.concat(-1, n), []);
-  const pager = (
+  const pageNumbers = _.uniq(numbers).sort((a, b) => a - b).filter(n => n > 0 && n <= totalPages)
+    .reduce((result, n) => n - (result[result.length - 1] || 0) === 1
+      ? result.concat(n) : result.concat(-1, n), []);
+  const pager = totalPages > 1 ? (
     <div className="wrapper">
       {page > 1 &&
       <Link href={urlMaker(page - 1)}>
@@ -39,6 +40,7 @@ const usePager = (options: Options) => {
       <style jsx>{`
         .wrapper {
           margin: 0 -8px;
+          padding: 8px 0;
         }
 
         .wrapper > a, .wrapper > span {
@@ -47,7 +49,7 @@ const usePager = (options: Options) => {
 
       `}</style>
     </div>
-  );
+  ) : null;
   return {pager};
 };
 
