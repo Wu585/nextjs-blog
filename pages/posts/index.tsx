@@ -23,16 +23,24 @@ const PostsIndex: NextPage<Props> = (props) => {
   return (
     <>
       <div className="posts">
-        <h1>文章列表</h1>
-        {posts.map(post =>
-          <div key={post.id} className="onePost">
-            <Link href={`/posts/${post.id}`}>
-              <a>
-                {post.title}
-              </a>
-            </Link>
-          </div>
-        )}
+        <header>
+          <h1>文章列表</h1>
+          <Link href="/posts/new">
+            <a>创建博客</a>
+          </Link>
+        </header>
+        {
+          posts.length === 0 ?
+            <div style={{marginTop: '100px'}}>暂无文章</div> :
+            posts.map(post =>
+              <div key={post.id} className="onePost">
+                <Link href={`/posts/${post.id}`}>
+                  <a>
+                    {post.title}
+                  </a>
+                </Link>
+              </div>
+            )}
         <footer>
           {pager}
         </footer>
@@ -42,6 +50,17 @@ const PostsIndex: NextPage<Props> = (props) => {
           max-width: 800px;
           margin: 0 auto;
           padding: 16px;
+        }
+
+        .posts > header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .posts > header > h1 {
+          margin: 0;
+          margin-right: auto;
         }
 
         .onePost {

@@ -1,9 +1,14 @@
-import {NextPage} from 'next';
+import {GetServerSideProps, GetServerSidePropsContext, NextPage} from 'next';
 import logo from 'assets/images/blog-logo.png';
 import Image from 'next/image';
 import Link from 'next/link';
+import {withSession} from '../lib/withSession';
+import {User} from '../src/entity/User';
 
-const Home: NextPage = () => {
+const Home: NextPage<{ user: User }> = (props) => {
+  if (!props.user && typeof window !== 'undefined') {
+    window.location.href = '/sign_up';
+  }
   return (
     <>
       <div className="cover">
@@ -29,3 +34,13 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = withSession(async (context: GetServerSidePropsContext) => {
+  // @ts-ignore
+  const user = context.req.session.get('currentUser');
+  return {
+    props: {
+      user: user ? user : null
+    }
+  };
+});

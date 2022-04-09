@@ -1,25 +1,55 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {GetServerSideProps, NextPage} from 'next';
 import {getDatabaseConnection} from '../../lib/getDatabaseConnection';
 import {Post} from '../../src/entity/Post';
 import {marked} from 'marked';
+import Link from 'next/link';
+import axios from 'axios';
 
 type Props = {
-  post: Post
+  post: Post,
+  id: number
 }
 
 const PostsShow: NextPage<Props> = (props) => {
-  const {post} = props;
+  const {post, id} = props;
+  const onDelete = useCallback(() => {
+    axios.delete(`/api/v1/posts/${id}`).then(() => {
+      window.alert('删除成功');
+      window.location.href = '/posts';
+    });
+  }, [id]);
   return (
     <>
       <div className="wrapper">
-        <h1>{post.title}</h1>
+        <header>
+          <h1>{post.title}</h1>
+          <p className="actions">
+            <Link href={{
+              pathname: '/posts/[id]/edit',
+              query: {id}
+            }}>
+              <a>编辑</a>
+            </Link>
+            <button onClick={onDelete}>删除</button>
+          </p>
+        </header>
         <article className="markdown-body" dangerouslySetInnerHTML={{__html: marked(post.content)}}>
         </article>
       </div>
       <style jsx>{`
+        .actions > * {
+          margin: 4px;
+        }
+
+        .actions > *:first-child {
+          margin-left: 0;
+        }
+
         .wrapper {
           padding: 16px 24px;
+          max-width: 800px;
+          margin: 16px auto;
         }
 
         h1 {
@@ -50,7 +80,8 @@ export const getServerSideProps: GetServerSideProps<any, { id: string }> = async
   const post = await connect.manager.findOne(Post, id);
   return {
     props: {
-      post: JSON.parse(JSON.stringify(post))
+      post: JSON.parse(JSON.stringify(post)),
+      id
     }
   };
 };

@@ -22,6 +22,7 @@ const Signup: NextPage<{ user: User }> = (props) => {
         window.alert('登录成功');
         const query = qs.parse(window.location.search.split('?')[1]);
         query.return_to && (window.location.href = query.return_to?.toString());
+        window.location.href = '/';
       }, (error) => {
         if (error.response) {
           const response: AxiosResponse = error.response;
