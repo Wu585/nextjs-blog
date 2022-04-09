@@ -31,7 +31,7 @@ const PostsShow: NextPage<Props> = (props) => {
             }}>
               <a>编辑</a>
             </Link>
-            <button onClick={onDelete}>删除</button>
+            <span style={{color: '#00adb5', borderBottom: '1px solid', cursor: 'pointer'}} onClick={onDelete}>删除</span>
           </p>
         </header>
         <article className="markdown-body" dangerouslySetInnerHTML={{__html: marked(post.content)}}>
