@@ -15,7 +15,7 @@ const Posts = withSession(async (req: NextApiRequest, res: NextApiResponse) => {
       return;
     }
     post.author = user;
-    post.authorId = user.id
+    post.authorId = user.id;
     const connection = await getDatabaseConnection();
     await connection.manager.save(post);
     res.json(post);
