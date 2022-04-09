@@ -45,8 +45,8 @@ export const getDatabaseConnection = async () => {
 
 const options = {
   ...config,
-  host: process.env.NODE_ENV === 'production' ? config.host : config.host,
-  database: process.env.NODE_ENV === 'production' ? 'blog_development' : 'blog_development',
+  host: process.env.NODE_ENV === 'production' ? 'localhost' : config.host,
+  database: process.env.NODE_ENV === 'production' ? 'blog_production' : 'blog_development',
   entities: [Post, User, Comment]
 };
 
@@ -62,7 +62,7 @@ function entitiesChanged(prevEntities: any[], newEntities: any[]): boolean {
 
 async function updateConnectionEntities(connection: Connection, entities: any[]) {
   if (!entitiesChanged(connection.options.entities, entities)) return;
-
+  console.log('here');
   // @ts-ignore
   connection.options.entities = entities;
 
