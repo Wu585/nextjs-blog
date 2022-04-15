@@ -14,10 +14,11 @@ type Props = {
 
 const Form: React.FC<Props> = (props) => {
   return (
-    <form onSubmit={props.onSubmit}>
+    <form className="wrapper" onSubmit={props.onSubmit}>
       {props.fields.map(field =>
         <div key={field.label}>
-          <label>{field.label}
+          <label>
+            <span>{field.label}</span>
             {field.type === 'textarea' ?
               <textarea onChange={field.onChange} value={field.value}/> :
               <input type={field.type} value={field.value} onChange={field.onChange}/>
@@ -28,9 +29,29 @@ const Form: React.FC<Props> = (props) => {
           </div>}
         </div>
       )}
-      <div>
+      <div className='child-el'>
         {props.buttons}
       </div>
+      <style jsx>{`
+        .wrapper {
+          max-width: 800px;
+          margin: 20px auto;
+        }
+
+        .wrapper > div > label {
+          display: flex;
+          padding: 12px 6px; 
+        }
+
+        .wrapper > div > label > span {
+          width: 120px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0 6px;
+        }
+      `}
+      </style>
     </form>
   );
 };

@@ -2,6 +2,7 @@ import {NextPage} from 'next';
 import {useCallback, useState} from 'react';
 import axios, {AxiosResponse} from 'axios';
 import Form from '../components/Form';
+import Header from '../components/Header';
 
 const Signup: NextPage = () => {
   const [formData, setFormData] = useState({
@@ -34,14 +35,16 @@ const Signup: NextPage = () => {
   }, [formData]);
   return (
     <div>
-      <h1>注册</h1>
+      <Header/>
       <Form
         onSubmit={onSubmit}
         buttons={
           <>
-            <button type="submit">
-              注册
-            </button>
+            <div className="child-el">
+              <button type="submit">
+                注册
+              </button>
+            </div>
           </>
         }
         fields={[{
@@ -60,6 +63,18 @@ const Signup: NextPage = () => {
             errors: errors.password
           }
         ]}/>
+      <style jsx>{`
+        .child-el {
+          display: flex;
+          justify-content: flex-end;
+          padding: 12px 64px;
+        }
+
+        .child-el button {
+          width: 64px;
+          height: 32px;
+        }
+      `}</style>
     </div>
   );
 };

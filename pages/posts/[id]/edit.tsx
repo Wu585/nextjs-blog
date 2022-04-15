@@ -20,7 +20,7 @@ const PostsEdit: NextPage<Props> = (props) => {
       ],
       buttons:
         <div className="actions">
-          <button type="submit" style={{width: '64px', height: '32px'}}>
+          <button type="submit" style={{width: '64px', height: '32px',whiteSpace:'nowrap'}}>
             提交
           </button>
         </div>

@@ -5,6 +5,7 @@ import {withSession} from '../lib/withSession';
 import {User} from '../src/entity/User';
 import Form from '../components/Form';
 import qs from 'qs';
+import Header from '../components/Header';
 
 const Signup: NextPage<{ user: User }> = (props) => {
   const [formData, setFormData] = useState({
@@ -37,17 +38,20 @@ const Signup: NextPage<{ user: User }> = (props) => {
   }, [formData]);
   return (
     <div>
-      {props.user &&
-      <div>当前登录用户为 {props.user.username}</div>
-      }
-      <h1>登录</h1>
+      {/*<div style={{display:'flex',alignItems:'center',justifyContent:'center',maxWidth:'800px'}}>
+        <h1 style={{borderRight:'2px solid #000',padding:'0 12px'}}>登录</h1>
+        <h1 style={{padding:'0 12px'}} onClick={()=>window.location.href='/sign_in'}>注册</h1>
+      </div>*/}
+      <Header/>
       <Form
         onSubmit={onSubmit}
         buttons={
           <>
-            <button type="submit">
-              登录
-            </button>
+            <div className="child-el">
+              <button type="submit">
+                登录
+              </button>
+            </div>
           </>
         }
         fields={[{
@@ -60,6 +64,18 @@ const Signup: NextPage<{ user: User }> = (props) => {
             onChange: e => onChange('password', e.target.value),
             errors: errors.password
           }]}/>
+      <style jsx>{`
+        .child-el {
+          display: flex;
+          justify-content: flex-end;
+          padding: 12px 64px;
+        }
+
+        .child-el button {
+          width: 64px;
+          height: 32px;
+        }
+      `}</style>
     </div>
   );
 };
