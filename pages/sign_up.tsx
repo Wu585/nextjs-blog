@@ -42,7 +42,6 @@ const Signup: NextPage<{ user: User }> = (props) => {
         <h1 style={{borderRight:'2px solid #000',padding:'0 12px'}}>登录</h1>
         <h1 style={{padding:'0 12px'}} onClick={()=>window.location.href='/sign_in'}>注册</h1>
       </div>*/}
-      <Header/>
       <Form
         onSubmit={onSubmit}
         buttons={
@@ -50,6 +49,11 @@ const Signup: NextPage<{ user: User }> = (props) => {
             <div className="child-el">
               <button type="submit">
                 登录
+              </button>
+              <button onClick={() => {
+                window.location.href = '/sign_in';
+              }} type="submit">
+                去注册
               </button>
             </div>
           </>
@@ -74,6 +78,7 @@ const Signup: NextPage<{ user: User }> = (props) => {
         .child-el button {
           width: 64px;
           height: 32px;
+          margin: 0 6px;
         }
       `}</style>
     </div>

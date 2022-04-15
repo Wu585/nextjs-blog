@@ -35,7 +35,6 @@ const Signup: NextPage = () => {
   }, [formData]);
   return (
     <div>
-      <Header/>
       <Form
         onSubmit={onSubmit}
         buttons={
@@ -43,6 +42,11 @@ const Signup: NextPage = () => {
             <div className="child-el">
               <button type="submit">
                 注册
+              </button>
+              <button onClick={() => {
+                window.location.href = '/sign_up';
+              }} type="submit">
+                去登陆
               </button>
             </div>
           </>
@@ -73,6 +77,7 @@ const Signup: NextPage = () => {
         .child-el button {
           width: 64px;
           height: 32px;
+          margin: 0 6px;
         }
       `}</style>
     </div>
